@@ -14,8 +14,8 @@
   ```
 
 ## Companion objects
-- implicit conversions for companion classes (type classes)
-- extractor object (with unapply method and optional apply) for custom matching patterns
+- `implicit conversions` for companion classes (type classes)
+- `extractor` object (with unapply method and optional apply) for custom matching patterns
 
 ## Implicits
 - `implicit conversion` to an expected type via function
