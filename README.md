@@ -35,8 +35,13 @@ converting the receiver; interoperating with new types via conversation to expec
 - `package objects` can contain arbitrary definitions, not just variable and method definitions. For instance, they are frequently used to hold package-wide type aliases and implicit conversions. Package objects can even inherit Scala classes and traits.
 
 ## Types
+- overview https://kubuszok.com/2018/kinds-of-types-in-scala-part-1/
 - `abstract types` nearly like in OCaml
-- `compound types` (refinement)
+  ```scala
+  // scala code
+  ConcreteModule extends AbstractModule with { type  t: Int }
+  ```
+- `compound type` is mixed type `A with B with C ... { refinement }`
 - `case classes` nearly like records in OCaml (can be matched and serialized)
 
 ## Collections
