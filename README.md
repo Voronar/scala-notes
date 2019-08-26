@@ -6,7 +6,7 @@
 - `values classes` (inherited from AnyVal) for optimisation (raw type representation instead boxed)
 - `abstract classes` and `traits` are interchangeable
 - `multiple inheritance` problem solves with `linearization` (special Scala algorithm) of applied traits from right most trait to left the left one (`SomeClass with Trait1 with Trait2`)
-- `self type` is explicit mark of this type on trait that allow this trait recognise members from another mixed traits; The self type annotation is just declaring that this type needs to extend / implement the annotated type, but it doesn't extend it yet. It lets you "inject" the extension, thus supports dependency injection.
+- `self type` is explicit mark of self type on trait that allow this trait recognise members from another mixed in traits; https://coderwall.com/p/t_rapw/cake-pattern-in-scala-self-type-annotations-explicitly-typed-self-references-explained https://github.com/davidmoten/cake-pattern
 - the `.type` singleton type forming operator can be applied to values of all subtypes of Any
   ```scala
   def foo[T](t: T): t.type = t
