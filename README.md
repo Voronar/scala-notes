@@ -5,7 +5,7 @@
 - `sealed base trait` for case classes in order to isolate matching variants (prohibit extending classes outside package scope)
 - `values classes` (inherited from AnyVal) for optimisation (raw type representation instead boxed)
 - `abstract classes` and `traits` are interchangeable
-- `multiple inheritance` problem solves with linearisation of applied traits from right most trait to left the left one (SomeClass with Trait1 with Trait2)
+- `multiple inheritance` problem solves with `linearization` (special Scala algorithm) of applied traits from right most trait to left the left one (`SomeClass with Trait1 with Trait2`)
 - `self type` is explicit mark of this type on trait that allow this trait recognise members from another mixed traits; The self type annotation is just declaring that this type needs to extend / implement the annotated type, but it doesn't extend it yet. It lets you "inject" the extension, thus supports dependency injection.
 - the `.type` singleton type forming operator can be applied to values of all subtypes of Any
   ```scala
@@ -60,8 +60,8 @@ converting the receiver; interoperating with new types via conversation to expec
   import scala.reflect.ClassTag
   def evenElems[T: ClassTag](xs: Vector[T]): Array[T]
   ```
-- mutable and immutable list may be replaced just by changing val to var; operators and implicits makes other things
-- `view` is lazy collection what executes transformations on its element only after materialization (e.x. toVector, toList)
+- mutable and immutable list may be replaced just by changing `val` to `var`; operators and implicits makes other things
+- `view` is lazy collection what executes transformations on its element only after materialization (e.x. `toVector`, `toList`)
 
 ## Other
 - `for expression` is just new syntax, what generates code with map, flatMap, withFilter, foreach for classes with those methods
