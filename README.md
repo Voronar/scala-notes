@@ -38,20 +38,31 @@ converting the receiver; interoperating with new types via conversation to expec
 - overview https://kubuszok.com/2018/kinds-of-types-in-scala-part-1/
 - `abstract types` nearly like in OCaml
   ```scala
-  // scala code
-  ConcreteModule extends AbstractModule with { type  t: Int }
+  trait AbstractModule {
+    type T
+    val value: T
+  }
+
+  trait ConcreteModule extends AbstractModule {
+    type T = Int
+    val value = 1
+    // val value = "1" // error: type mismatch
+  }
+
+  (new ConcreteModule {}).value // 1
   ```
 - `compound type` is mixed type `A with B with C ... { refinement }`
 - `case classes` nearly like records in OCaml (can be matched and serialized)
 
 ## Collections
 - `generic arrays` require run-time class tag through implicit context bound
+  ```scala
+  import scala.reflect.ClassTag
+  def evenElems[T: ClassTag](xs: Vector[T]): Array[T]
+  ```
 - mutable and immutable list may be replaced just by changing val to var; operators and implicits makes other things
 - `view` is lazy collection what executes transformations on its element only after materialization (e.x. toVector, toList)
-    ```scala
-    import scala.reflect.ClassTag
-    def evenElems[T: ClassTag](xs: Vector[T]): Array[T]
-    ```
+
 ## Other
 - `for expression` is just new syntax, what generates code with map, flatMap, withFilter, foreach for classes with those methods
 - `call-by-name` parameters are lazy and executes every time was accessed (similar to generator concept)
