@@ -18,14 +18,21 @@
 - `extractor` object (with unapply method and optional apply) for custom matching patterns
 
 ## Implicits
-- `implicit conversion` to an expected type via function
+- `implicit conversion (older style, prefer implicit classes with implicit parameters)` to an expected type via function
 converting the receiver; interoperating with new types via conversation to expected class with new methods
   ```scala
   1 + complexStructureWithPlusMethod
-  Map(1 -> "one", 2 -> "two", 3 -> "three")
   ```
 - `implicit classes`; for any such class, the compiler generates an implicit conversion from the class’s constructor parameter to the class itself and makes all methods implicit
 - `implicit objects` like classes but lazy; like any object, an implicit object is a singleton but it is marked implicit so that the compiler can find if it is looking for an implicit value of the appropriate type. A typical use case of an implicit object is a concrete, singleton instance of a trait which is used to define a type class
+- `context bound syntax`
+  ```scala
+    def add[A: Monoid](items: List[A]): A =
+      items.foldLeft(Monoid[A].empty)(_ |+| _)
+    // is sugar for code bellow
+    def add[A](items: List[A])(implicit monoid: Monoid[A]): A =
+      items.foldLeft(monoid.empty)(_ |+| _)
+  ```
 
 ## Modularity
 - static module = object + trait
@@ -86,3 +93,6 @@ converting the receiver; interoperating with new types via conversation to expec
     }
   }
   ```
+  
+  ## `cats`
+  -  Cats generally prefers to use invariant type classes. This allows us to specify more specific instances for subtypes if we want.
