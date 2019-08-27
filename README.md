@@ -94,5 +94,5 @@ converting the receiver; interoperating with new types via conversation to expec
   }
   ```
   
-  ## `cats`
-  -  Cats generally prefers to use invariant type classes. This allows us to specify more specific instances for subtypes if we want.
+## `cats`
+-  Cats generally prefers to use invariant type classes. This allows us to specify more specific instances for subtypes if we want.
