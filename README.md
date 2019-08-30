@@ -103,6 +103,18 @@ converting the receiver; interoperating with new types via conversation to expec
     }
   }
   ```
+- `break` and `continue` is emulates with `breakable` + `break` methods
+```scala
+  def break(): Nothing = { throw breakException }
+  def breakable(op: => Unit): Unit = {
+    try {
+      op
+    } catch {
+      case ex: BreakControl =>
+        if (ex ne breakException) throw ex
+    }
+  }
+```
   
 ## `cats`
 -  Cats generally prefers to use invariant type classes. This allows us to specify more specific instances for subtypes if we want.
@@ -119,3 +131,5 @@ converting the receiver; interoperating with new types via conversation to expec
   - https://alvinalexander.com/scala/how-find-regex-patterns-matches-in-strings-scala
   - https://alvinalexander.com/scala/string-interpolation-scala-2.10-embed-variables-in-strings
   - https://alvinalexander.com/scala/how-find-replace-regex-patterns-in-scala-strings
+- collections
+  - [traverse with index](https://stackoverflow.com/questions/6821194/get-index-of-current-element-in-a-foreach-method-of-traversable)
