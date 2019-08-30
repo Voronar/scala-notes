@@ -35,8 +35,8 @@ converting the receiver; interoperating with new types via conversation to expec
   ```
 
 ## Modularity
-- static module = object + trait
-- dynamic module = class + trait
+- static module = `object` + `trait`
+- dynamic module = `class` + `trait`
 - https://github.com/yawaramin/scala-modules
 - http://lambdafoo.com/scala-syd-2015-modules
 - `package objects` can contain arbitrary definitions, not just variable and method definitions. For instance, they are frequently used to hold package-wide type aliases and implicit conversions. Package objects can even inherit Scala classes and traits.
@@ -60,6 +60,8 @@ converting the receiver; interoperating with new types via conversation to expec
   ```
 - `compound type` is mixed type `A with B with C ... { refinement }`
 - `case classes` nearly like records in OCaml (can be matched and serialized)
+- `existential types` will be dropped out https://dotty.epfl.ch/docs/reference/dropped-features/existential-types.html; use `type refinement` (`<:` or `:>`) with wildcards (`_`)
+- `{ def close(): Unit }` is a `structural type`, because the base type is `AnyRef`, and `AnyRef` does not have a member named `close`; commonly used in conjunction with `type refinement`
 
 ## Collections
 - `generic arrays` require run-time class tag through implicit context bound
@@ -103,3 +105,16 @@ converting the receiver; interoperating with new types via conversation to expec
   
 ## `cats`
 -  Cats generally prefers to use invariant type classes. This allows us to specify more specific instances for subtypes if we want.
+
+## Routine basics
+- random numbers
+  - https://stackoverflow.com/questions/39402567/get-random-number-between-two-numbers-in-scala
+  - https://chrisalbon.com/scala/basics/random_integer_between_two_values/
+- read/write from/to stdio, file
+  - https://alvinalexander.com/scala/how-to-open-read-text-files-in-scala-cookbook-examples
+  - https://alvinalexander.com/scala/how-to-write-text-files-in-scala-printwriter-filewriter
+  - https://stackoverflow.com/questions/5055349/how-to-take-input-from-a-user-in-scala
+- regexpr, interpolation
+  - https://alvinalexander.com/scala/how-find-regex-patterns-matches-in-strings-scala
+  - https://alvinalexander.com/scala/string-interpolation-scala-2.10-embed-variables-in-strings
+  - https://alvinalexander.com/scala/how-find-replace-regex-patterns-in-scala-strings
