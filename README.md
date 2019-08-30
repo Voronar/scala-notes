@@ -39,7 +39,7 @@ converting the receiver; interoperating with new types via conversation to expec
 - dynamic module = `class` + `trait`
 - https://github.com/yawaramin/scala-modules
 - http://lambdafoo.com/scala-syd-2015-modules
-- `package objects` can contain arbitrary definitions, not just variable and method definitions. For instance, they are frequently used to hold package-wide type aliases and implicit conversions. Package objects can even inherit Scala classes and traits.
+- ⚠️ [DEPRECATED](https://dotty.epfl.ch/docs/reference/dropped-features/package-objects.html) `package objects` can contain arbitrary definitions, not just variable and method definitions. For instance, they are frequently used to hold package-wide type aliases and implicit conversions. Package objects can even inherit Scala classes and traits
 
 ## Types
 - overview https://kubuszok.com/2018/kinds-of-types-in-scala-part-1/
@@ -60,7 +60,8 @@ converting the receiver; interoperating with new types via conversation to expec
   ```
 - `compound type` is mixed type `A with B with C ... { refinement }`
 - `case classes` nearly like records in OCaml (can be matched and serialized)
-- `existential types` will be dropped out https://dotty.epfl.ch/docs/reference/dropped-features/existential-types.html; use `type refinement` (`<:` or `:>`) with wildcards (`_`)
+- ⚠️ [DEPRECATED](https://dotty.epfl.ch/docs/reference/dropped-features/existential-types.html) `existential types`; use `type constraints` (`<:` or `:>`) with wildcards (`_`) instead
+- `type refinement` is a type formed by supplying a base type with a number of members inside curly braces. The members in the curly braces refine the types that are present in the base type. For example, the type of “animal that eats grass” is `Animal { type SuitableFood = Grass }`
 - `{ def close(): Unit }` is a `structural type`, because the base type is `AnyRef`, and `AnyRef` does not have a member named `close`; commonly used in conjunction with `type refinement`
 
 ## Collections
