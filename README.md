@@ -68,6 +68,13 @@ converting the receiver; interoperating with new types via conversation to expec
   def evenElems[T: ClassTag](xs: Vector[T]): Array[T]
   ```
 - mutable and immutable list may be replaced just by changing `val` to `var`; operators and implicits makes other things
+  ```scala
+  var imuSet = scala.collection.immutable.Set(1)
+  val muSet = scala.collection.mutable.Set(1)
+
+  imuSet += 2 // '+=' translates to 'imuSet = imuSet + 2'
+  muSet += 2 // '+=' is mutable Set method
+  ```
 - `view` is lazy collection what executes transformations on its element only after materialization (e.x. `toVector`, `toList`)
 
 ## Other
