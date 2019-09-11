@@ -63,6 +63,11 @@ converting the receiver; interoperating with new types via conversation to expec
 - ⚠️ [DEPRECATED](https://dotty.epfl.ch/docs/reference/dropped-features/existential-types.html) `existential types`; use `type constraints` (`<:` or `:>`) with wildcards (`_`) instead
 - `type refinement` is a type formed by supplying a base type with a number of members inside curly braces. The members in the curly braces refine the types that are present in the base type. For example, the type of “animal that eats grass” is `Animal { type SuitableFood = Grass }`
 - `{ def close(): Unit }` is a `structural type`, because the base type is `AnyRef`, and `AnyRef` does not have a member named `close`; commonly used in conjunction with `type refinement`
+- `Type alias` can be expressed as `infix` operator
+  ```scala
+    type <=[B, A] = A => B // invert type mapping
+    type StringToIntFunction = Int <= String // same as String => Int
+  ```
 
 ## Collections
 - `generic arrays` require run-time class tag through implicit context bound
