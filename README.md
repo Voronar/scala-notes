@@ -123,6 +123,7 @@ converting the receiver; interoperating with new types via conversation to expec
   
 ## `cats`
 -  Cats generally prefers to use invariant type classes. This allows us to specify more specific instances for subtypes if we want.
+- [`type Id[A] = A` type gives the ability to abstract over monadic and non-monadic code is extremely powerful.](https://books.underscore.io/scala-with-cats/scala-with-cats.html#sec:monads:identity) For example, we can run code asynchronously in production using Future and synchronously in test using `Id`.
 
 ## Routine basics
 - random numbers
