@@ -124,7 +124,7 @@ converting the receiver; interoperating with new types via conversation to expec
 ## `cats`
 -  `cats` generally prefers to use invariant type classes. This allows us to specify more specific instances for subtypes if we want.
 - [`type Id[A] = A` type gives the ability to abstract over monadic and non-monadic code is extremely powerful.](https://books.underscore.io/scala-with-cats/scala-with-cats.html#sec:monads:identity) For example, we can run code asynchronously in production using Future and synchronously in test using `Id`.
-- `cats` `Eval` monad makes computations stack safety (prevents stack overflow issue). For example a stack safety stream folding `Foldable[Stream]` (not safety for standard Scala stream folding via `Stream.foldLeft/foldRight`).
+- `cats` [`Eval` monad](https://books.underscore.io/scala-with-cats/scala-with-cats.html#eval-as-a-monad) makes computations stack safety (prevents stack overflow issue). For example a stack safety stream folding `Foldable[Stream]` (not safety for standard Scala stream folding via `Stream.foldLeft/foldRight`).
 
 ## Routine basics
 - random numbers
