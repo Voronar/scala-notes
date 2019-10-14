@@ -27,12 +27,22 @@ converting the receiver; interoperating with new types via conversation to expec
 - `implicit objects` like classes but lazy; like any object, an implicit object is a singleton but it is marked implicit so that the compiler can find if it is looking for an implicit value of the appropriate type. A typical use case of an implicit object is a concrete, singleton instance of a trait which is used to define a type class
 - `context bound syntax`
   ```scala
-    def add[A: Monoid](items: List[A]): A =
-      items.foldLeft(Monoid[A].empty)(_ |+| _)
-    // is sugar for code bellow
-    def add[A](items: List[A])(implicit monoid: Monoid[A]): A =
-      items.foldLeft(monoid.empty)(_ |+| _)
+  def add[A: Monoid](items: List[A]): A =
+    items.foldLeft(Monoid[A].empty)(_ |+| _)
+  // is sugar for code bellow
+  def add[A](items: List[A])(implicit monoid: Monoid[A]): A =
+    items.foldLeft(monoid.empty)(_ |+| _)
   ```
+- `implitly[T]` means return implicit value of type T in the context
+  ```scala
+  implicit class Foo(val i: Int) {
+    def addValue(v: Int): Int = i + v
+  }
+
+  implicit val foo: Foo = Foo(1)
+  val fooImplicitly = implicitly[Foo] // Foo(1)
+  fooImplicitly.addValue(1) // 2
+    ```
 
 ## Modularity
 - static module = `object` + `trait`
@@ -85,6 +95,11 @@ converting the receiver; interoperating with new types via conversation to expec
   ```
 - `view` is lazy collection what executes transformations on its element only after materialization (e.x. `toVector`, `toList`)
 
+## Parallelism/Concurrency
+- avoid cyclic dependencies between `lazy` values, as they can cause deadlocks
+- never invoke blocking operations inside `lazy` value initialization expressions or singleton object constructors
+- never call `synchronized` on publicly available objects; always use a dedicated, private dummy object for synchronization
+
 ## Other
 - `for expression` is just new syntax, what generates code with map, flatMap, withFilter, foreach for classes with those methods
 - `call-by-name` parameters are lazy and executes every time was accessed (similar to generator concept)
@@ -109,7 +124,7 @@ converting the receiver; interoperating with new types via conversation to expec
   }
   ```
 - `break` and `continue` is emulates with `breakable` + `break` methods
-```scala
+  ```scala
   def break(): Nothing = { throw breakException }
   def breakable(op: => Unit): Unit = {
     try {
@@ -119,7 +134,7 @@ converting the receiver; interoperating with new types via conversation to expec
         if (ex ne breakException) throw ex
     }
   }
-```
+  ```
   
 ## `cats`
 -  `cats` generally prefers to use invariant type classes. This allows us to specify more specific instances for subtypes if we want.
